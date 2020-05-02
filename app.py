@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 # from flask_wtf import FlaskForm
 # from wtforms import SubmitField, StringField
 # from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
+Bootstrap(app)
 app.config['SECRET_KEY'] = 'mykeyisseceret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///weather.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -48,7 +50,7 @@ def index_get():
         weather_data.append(weather)
 
     print(weather)
-    return render_template('weather.html', weather_data=weather_data, form=form)
+    return render_template('weather.html', weather_data=weather_data)
 
 
 @app.route('/', methods=['POST'])
