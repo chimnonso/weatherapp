@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello Weather</h1>
+    <!-- <form method="POST">
+        {{ form.hidden_tag()}}
+        {{ form.name }}
+        {{ form.submit() }}
+    </form> -->
+
+    <form method='POST'>
+        <input type="text" name="city">
+        <input type="submit" value="Add">
+    </form>
+    <br>
+    <br>
+    <ul>
+        {% for weather in weather_data %}
+        <li>City: {{ weather.city }} </li>
+        <li>Description: {{ weather.description | capitalize }} </li>
+        <li>Temperature: {{ weather.temperature}}  </li>
+        <li>Humidity: {{ weather.humidity}} % </li>
+        <li><img src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" alt="icon"></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
