@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import requests
+import requests, math
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 # from flask_wtf import FlaskForm
@@ -33,7 +33,7 @@ class City(db.Model):
 def index_get():
 
     cities = City.query.all()
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=2a0d4205193503d617df50c6ea042e23'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=2a0d4205193503d617df50c6ea042e23'
     weather_data = []
     for city in cities:
         
@@ -41,7 +41,7 @@ def index_get():
         print(resp)
         weather = {
             'city': city.name,
-            'temperature': resp['main']['temp'] ,
+            'temperature': math.ceil(resp['main']['temp']) ,
             'description': resp['weather'][0]['description'],
             'icon': resp['weather'][0]['icon'],
             'humidity': resp['main']['humidity'] ,
